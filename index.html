@@ -2,47 +2,65 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Pra você ❤️</title>
+<title> For you Little Princess ❤️</title>
 
 <style>
 body {
   margin: 0;
   height: 100vh;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  background: radial-gradient(circle at top, #ff758c, #1a001f);
+  color: white;
 }
 
+/* estrelas */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}
+
+/* card */
 .card {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
+  text-align: center;
+  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.1);
   padding: 40px;
   border-radius: 20px;
-  text-align: center;
-  color: white;
   width: 350px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  animation: aparecer 1.5s ease;
 }
 
-h1 {
-  margin-bottom: 10px;
+/* coração */
+.heart {
+  font-size: 40px;
+  animation: pulse 1s infinite;
 }
 
-p {
-  font-size: 18px;
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
 }
 
+/* botão */
 button {
   margin-top: 20px;
   padding: 12px 20px;
   border: none;
   border-radius: 10px;
-  background: white;
-  color: #ff4d6d;
-  font-weight: bold;
+  background: #ff4d6d;
+  color: white;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -51,32 +69,11 @@ button:hover {
   transform: scale(1.1);
 }
 
-@keyframes aparecer {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.heart {
-  position: absolute;
-  color: white;
-  animation: subir 4s linear infinite;
-}
-
-@keyframes subir {
-  0% {
-    transform: translateY(100vh);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-10vh);
-    opacity: 0;
-  }
+/* texto digitando */
+#texto {
+  margin-top: 20px;
+  font-size: 18px;
+  min-height: 80px;
 }
 </style>
 </head>
@@ -84,35 +81,45 @@ button:hover {
 <body>
 
 <div class="card">
-  <h1>Oi, lanna ❤️</h1>
-  <p>Eu fiz isso aqui só pra te lembrar o quanto você é especial pra mim.</p>
-
-  <button onclick="mostrar()">Abrir 💌</button>
-
-  <p id="msg" style="display:none; margin-top:15px;">
-    Você foi a melhor parte da minha vida 💖<br>
-    Eu te amo mais do que qualquer coisa.
-  </p>
+  <div class="heart">❤️</div>
+  <h1>Oi, meu amor</h1>
+  <button onclick="start()">Clica aqui 💌</button>
+  <div id="texto"></div>
 </div>
 
+<audio id="musica" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-function mostrar() {
-  document.getElementById("msg").style.display = "block";
+// estrelas no fundo
+for(let i=0;i<100;i++){
+  let star = document.createElement("div");
+  star.className = "star";
+  star.style.left = Math.random()*100+"vw";
+  star.style.top = Math.random()*100+"vh";
+  document.body.appendChild(star);
 }
 
-// corações subindo
-setInterval(() => {
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
+// texto digitando
+const mensagem = "Você é a melhor coisa que já aconteceu na minha vida... Eu te amo mais do que palavras conseguem explicar ❤️";
 
-  document.body.appendChild(heart);
+function start(){
+  document.getElementById("musica").play();
 
-  setTimeout(() => {
-    heart.remove();
-  }, 4000);
-}, 300);
+  let i = 0;
+  let speed = 40;
+
+  function digitar(){
+    if(i < mensagem.length){
+      document.getElementById("texto").innerHTML += mensagem.charAt(i);
+      i++;
+      setTimeout(digitar, speed);
+    }
+  }
+
+  digitar();
+}
 </script>
 
 </body>
