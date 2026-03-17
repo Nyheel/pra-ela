@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>For You ❤️</title>
+<title>Pra você ❤️</title>
 
 <style>
 body {
@@ -41,7 +41,7 @@ body {
   width: 350px;
 }
 
-/* coração pulsando */
+/* coração */
 .heart {
   font-size: 40px;
   animation: pulse 1s infinite;
@@ -69,7 +69,7 @@ button:hover {
   transform: scale(1.1);
 }
 
-/* texto digitando */
+/* texto */
 #texto {
   margin-top: 20px;
   font-size: 18px;
@@ -87,13 +87,16 @@ button:hover {
   <div id="texto"></div>
 </div>
 
-<!-- MÚSICA -->
-<audio id="musica" loop>
-  <source src="careless.mp3" type="audio/mpeg">
-</audio>
+<!-- PLAYER INVISÍVEL DO YOUTUBE -->
+<iframe id="ytplayer"
+width="0" height="0"
+src=""
+frameborder="0"
+allow="autoplay">
+</iframe>
 
 <script>
-// estrelas no fundo
+// estrelas
 for(let i=0;i<100;i++){
   let star = document.createElement("div");
   star.className = "star";
@@ -102,12 +105,15 @@ for(let i=0;i<100;i++){
   document.body.appendChild(star);
 }
 
-// mensagem personalizada (MUDA ISSO AQUI 👇)
+// mensagem (edita aqui se quiser)
 const mensagem = "Você é a melhor coisa que já aconteceu na minha vida... Eu te amo mais do que palavras conseguem explicar ❤️";
 
 function start(){
-  document.getElementById("musica").play();
+  // toca música
+  let player = document.getElementById("ytplayer");
+  player.src = "https://www.youtube.com/embed/izGwDsrQ1eQ?autoplay=1&loop=1&playlist=izGwDsrQ1eQ";
 
+  // efeito digitando
   let i = 0;
   let speed = 40;
 
