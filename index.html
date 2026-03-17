@@ -82,21 +82,18 @@ button:hover {
 
 <div class="card">
   <div class="heart">❤️</div>
-  <h1>Oi, meu bem</h1>
-  <button onclick="start()">Surpresa :D 💌</button>
+  <h1>Oi, meu amor</h1>
+  <button onclick="start()">Clica aqui 💌</button>
   <div id="texto"></div>
 </div>
 
-<!-- PLAYER INVISÍVEL DO YOUTUBE -->
-<iframe id="ytplayer"
-width="0" height="0"
-src=""
-frameborder="0"
-allow="autoplay">
-</iframe>
+<!-- 🎵 MÚSICA -->
+<audio id="musica" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-// estrelas
+// estrelas no fundo
 for(let i=0;i<100;i++){
   let star = document.createElement("div");
   star.className = "star";
@@ -105,13 +102,15 @@ for(let i=0;i<100;i++){
   document.body.appendChild(star);
 }
 
-// mensagem (edita aqui se quiser)
+// ✍️ EDITA ESSA MENSAGEM
 const mensagem = "Você é a melhor coisa que já aconteceu na minha vida... Eu te amo mais do que palavras conseguem explicar ❤️";
 
 function start(){
   // toca música
-  let player = document.getElementById("ytplayer");
-  player.src = "https://www.youtube.com/embed/9x9Y9Zx8b0E?autoplay=1&loop=1&playlist=9x9Y9Zx8b0E";
+  const musica = document.getElementById("musica");
+  musica.play().catch(() => {
+    alert("Toca no botão de novo pra música funcionar 💖");
+  });
 
   // efeito digitando
   let i = 0;
